@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+
+    box-sizing: border-box;
+    border: 2px solid;
+    height: 80vh;
+    width: 70vh;
+}
+
+.grid {
+    display: flex;
+
+    color: white;
+    border: 1px solid gray;
+    flex: 1 0 calc(6% - 2px);
+}
