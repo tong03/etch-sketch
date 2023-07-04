@@ -8,11 +8,20 @@ function makeGrid () {
 }
 
 function colorChange(e) {
-    e.target.style.backgroundColor = 'black';
+    // only change color if target has class "grid" in it
+    // this should limit color change to only the divs
+    if(e.target.classList.value == 'grid'){
+        e.target.style.backgroundColor = 'black';
+    }
 }
 
-const container = document.querySelector('.container');
+function updateGrid() {
+    let selection = parseInt(prompt('Enter desired grid dimensions: '));
+    // run grid function with new INT input
+}   
 
+const container = document.querySelector('.container');
+const gridBTN = document.querySelector('.makeG');
 // Make a 16x16 grid of divs
 for(let i=0; i<16;i++){
     for (let j=0; j<16;j++){
@@ -34,3 +43,5 @@ for(let i=0; i<16;i++){
         container.appendChild(grid);   
     }
 }
+
+gridBTN.addEventListener('click', updateGrid);

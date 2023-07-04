@@ -16,3 +16,9 @@
     border: 1px solid gray;
     flex: 1 0 calc(6% - 2px);
 }
+
+.makeG {
+    margin-top: 20px;
+    font-size: 30px;
+    background-color: indianred;
+}
