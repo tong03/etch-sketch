@@ -10,32 +10,35 @@ function makeGrid (dim) {
             container.appendChild(grid);   
         }
     }
-}
-/*
-function colorChange(e) {
-    // only change color if target has class "grid" in it
-    // this should limit color change to only the divs
-    if(e.target.classList.value == 'grid'){
-        e.target.style.backgroundColor = 'black';
-    }
-}
 
-function randomMode() {
+    /*
+    Select collection of grids with 'grid' class.
+    Loop through the grid collection and add event listener for each
+    that would run colorFill() with mousedown/mouseover/mouseup.
+    */
     let grids = document.getElementsByClassName('grid');
-    console.log(grids);
     Array.from(grids).forEach((grid) => {
         grid.addEventListener('mousedown', (e) => {
             // mouse down changes color
-            e.target.style.backgroundColor = randomColor;
+            colorFill(e);
             // mousedown and drag also changes color
-            this.addEventListener('mouseover', randomColor);
+            this.addEventListener('mouseover', colorFill);
         });
-        grid.addEventListener('mouseup', (e) => {
-            this.removeEventListener('mouseover', randomColor);
+        grid.addEventListener('mouseup', () => {
+            this.removeEventListener('mouseover', colorFill);
         });
     });
+    // if fill values already exists, retain them
+    if(!defaultC && rainbow){
+        defaultC = false;
+        rainbpw = true;
+    }
+    // else reset to default fill values
+    else {
+        defaultC = true;
+        rainbow = false;
+    }
 }
-*/
 
 function updateGrid() {
     let selection = parseInt(prompt('Enter desired grid dimensions: '));
@@ -48,43 +51,17 @@ function updateGrid() {
     }
     // run grid function with new INT input
     makeGrid(selection);
-}   
+}
 
-let defaultC = true;
-let rainbow = false;
-const container = document.querySelector('.container');
-const gridBTN = document.querySelector('.makeG');
-const rColorBTN = document.querySelector('.rand');
+// return a random color
+function randomColor() {
+    let val1 = Math.round(Math.random() * 255);
+    let val2 = Math.round(Math.random() * 255);
+    let val3 = Math.round(Math.random() * 255);
 
-// Default Grid Layout
-makeGrid(16);
-// Change grid to specified dimensions each time
-gridBTN.addEventListener('click', updateGrid);
-rColorBTN.addEventListener('click', () => {
-    defaultC = false;
-    rainbow = true;
-})
-// rColorBTN.addEventListener('click', randomMode);
-
-/*
-    Select collection of grids with 'grid' class
-
-    Loop through the grid collection and add event listener for each
-    that would run colorFill() with mousedown/mouseover/mouseup
-
- */
-let grids = document.getElementsByClassName('grid');
-Array.from(grids).forEach((grid) => {
-    grid.addEventListener('mousedown', (e) => {
-        // mouse down changes color
-        colorFill(e);
-        // mousedown and drag also changes color
-        this.addEventListener('mouseover', colorFill);
-    });
-    grid.addEventListener('mouseup', () => {
-        this.removeEventListener('mouseover', colorFill);
-    });
-});
+    let rColor = `rgb(${val1}, ${val2}, ${val3})`;
+    return rColor; 
+}
 
 // This function should only check for the correct active tags and react
 // correspondingly to fill in color
@@ -101,11 +78,46 @@ function colorFill(e) {
     }
 }
 
-function randomColor() {
-    let val1 = Math.round(Math.random() * 255);
-    let val2 = Math.round(Math.random() * 255);
-    let val3 = Math.round(Math.random() * 255);
 
-    let rColor = `rgb(${val1}, ${val2}, ${val3})`;
-    return rColor; 
-}
+
+/*********** Runtime Events ***********/
+
+const container = document.querySelector('.container');
+const gridBTN = document.querySelector('.makeG');
+const rColorBTN = document.querySelector('.rand');
+const clearBTN = document.querySelector('.clear');
+let defaultC = true;
+let rainbow = false;
+// Change grid to specified dimensions each time
+gridBTN.addEventListener('click', updateGrid);
+clearBTN.addEventListener('click', () => {
+    let firstChild = container.firstChild;
+    let counter = 0;
+    // first delete all current grid divs and tally total
+    while(firstChild){
+        container.removeChild(firstChild);
+        firstChild = container.firstChild;
+        counter += 1;
+    }
+    counter = Math.sqrt(counter);
+    console.log(counter);
+    // remake new grid based on number of grid divs
+    makeGrid(counter);
+})
+rColorBTN.addEventListener('click', () => {
+    // if rainbow is not true, turn rainbow on and darken button
+    if(!rainbow){
+        defaultC = false;
+        rainbow = true;
+        document.querySelector('.rand').style.filter = 'brightness(40%)';
+    }
+    // if already true, turn rainbow off and un-darken button
+    else{
+        defaultC = true;
+        rainbow = false;
+        document.querySelector('.rand').style.filter = 'brightness(100%)';
+    }
+})
+
+// Run Default Grid Layout
+makeGrid(16);
