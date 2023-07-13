@@ -9,10 +9,9 @@
     <script type="text/javascript" src="main.js" defer></script>
     <div class="screen">
         <div class="options">
-            <button class="makeG">New Grid</button>
             <button class="rand">Random Color</button>
             <button class="clear">Clear</button>
-            <div class="slider"><input type="range" min="0" max="100" 
+            <div class="slider"><input id="iPut" type="range" min="0" max="100" 
                 value="16" oninput= "rangeValue.innerText = 
                 'Grid Size: ' + this.value + 'x' + this.value">
                 <p id="rangeValue">Grid Size: 16x16</p>

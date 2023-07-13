@@ -40,11 +40,7 @@ function makeGrid (dim) {
     }
 }
 
-function updateGrid() {
-    let selection = parseInt(prompt('Enter desired grid dimensions: '));
-    if(selection > 100) {
-        selection = 100;
-    }
+function updateGrid(selection) {
     // clear previous grid before initializing new one
     while(container.firstChild){
         container.removeChild(container.firstChild);
@@ -83,13 +79,16 @@ function colorFill(e) {
 /*********** Runtime Events ***********/
 
 const container = document.querySelector('.container');
-const gridBTN = document.querySelector('.makeG');
 const rColorBTN = document.querySelector('.rand');
 const clearBTN = document.querySelector('.clear');
+const slideGrid = document.querySelector('.slider');
 let defaultC = true;
 let rainbow = false;
 // Change grid to specified dimensions each time
-gridBTN.addEventListener('click', updateGrid);
+slideGrid.addEventListener('input', () => {
+    let dim = document.getElementById('iPut').value;
+    updateGrid(dim);
+})
 clearBTN.addEventListener('click', () => {
     let firstChild = container.firstChild;
     let counter = 0;
