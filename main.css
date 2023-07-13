@@ -64,6 +64,7 @@ body {
 }
 
 .clear {
+    margin-bottom: 20px;
     font-size: 30px;
     background-color: crimson;
 
@@ -75,3 +76,71 @@ body {
 .clear:hover {
     filter:brightness(50%);
 }
+/*
+body {
+    background: linear-gradient(to right, red, yellow);
+}
+*/
+.slider {
+    position: relative;
+    width: 200px;
+    height: auto;
+    padding: 5px;
+    
+    background-color: crimson;
+    color: white;
+    font-size: 20px;
+    border-radius: 0.5em;
+    
+    display: flex;
+    flex-direction: column;
+    /*
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 15px 40px #7E6D5766;
+    */
+
+    /*
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 30px;
+    padding-left: 40px;
+    background: #fcfcfc;
+    border-radius: 20px;
+    */
+}
+
+.slider p {
+    align-self: center;
+    /*
+    font-size: 26px;
+    font-weight: 600;
+    font-family: Open Sans;
+    padding-left: 30px;
+    color: black;
+    */
+}
+/*
+.slider input[type="range"] {
+    -webkit-appearance:none !important;
+    width: 420px;
+    height: 2px;
+    background: black;
+    border: none;
+    outline: none;
+}
+
+.slider input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    width: 30px;
+    height:30px;
+    background: black;
+    border: 2px solid black;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.slider input[type="range"]::-webkit-slider-thumb:hover {
+    background: black;} 
+*/
